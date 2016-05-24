@@ -1,8 +1,6 @@
 package mn.digz6666.gm4java;
 
-import java.io.File;
 import java.io.IOException;
-import org.gm4java.engine.GMConnection;
 import org.gm4java.engine.GMException;
 import org.gm4java.engine.GMServiceException;
 import org.gm4java.engine.support.GMConnectionPoolConfig;
@@ -27,8 +25,8 @@ public class ImageUtil {
     }
 
     public String optimize(String input, int quality, String output) throws GMServiceException, GMException, IOException {
-        GMConnection connection = service.getConnection();
-        return connection.execute(
+        //GMConnection connection = service.getConnection();
+        return service.execute(
                 "convert",
                 input,
                 "-auto-orient",
@@ -40,9 +38,9 @@ public class ImageUtil {
     }
 
     public String resize(String input, int width, int height, boolean optimize, int quality, String output) throws GMServiceException, GMException, IOException {
-        GMConnection connection = service.getConnection();
+        //GMConnection connection = service.getConnection();
         if (optimize) {
-            return connection.execute(
+            return service.execute(
                     "convert",
                     "-size",
                     width + "x" + height,
@@ -56,7 +54,7 @@ public class ImageUtil {
                     "LZMA",
                     output);
         } else {
-            return connection.execute(
+            return service.execute(
                     "convert",
                     "-size",
                     width + "x" + height,
@@ -72,9 +70,9 @@ public class ImageUtil {
 
     public String applyWatermark(String input, String watermarkPath, String offset, String gravity, boolean optimize, int quality, String output)
             throws GMServiceException, GMException, IOException {
-        GMConnection connection = service.getConnection();
+        //GMConnection connection = service.getConnection();
         if (optimize) {
-            return connection.execute(
+            return service.execute(
                     "composite",
                     "-geometry",
                     offset, // +10+10
@@ -88,7 +86,7 @@ public class ImageUtil {
                     "LZMA",
                     output);
         } else {
-            return connection.execute(
+            return service.execute(
                     "composite",
                     "-geometry",
                     offset, // +10+10
